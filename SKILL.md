@@ -14,40 +14,38 @@ Slack, email, or chat — no markdown renderer needed on the recipient's side.
 **Zero pip packages.** Uses Playwright's bundled Chromium (pre-installed in
 this environment) and Python stdlib only.
 
-```sh
+```bash
 # That's it — no pip install needed.
 ```
 
 If Playwright is not installed on your system:
-
-```sh
+```bash
 pip install playwright
 playwright install chromium
 ```
 
 ## Usage
 
-```sh
+```bash
 # Basic — outputs <input>.png beside the .md file
 python3 md_to_png.py input.md
 
 # Retina quality (2x scale)
-python3 md_to_png.py input.md \
-  --output ~/Desktop/report.png --scale 2
+python3 md_to_png.py input.md --output ~/Desktop/report.png --scale 2
 
 # Custom width (wider = better for tables)
 python3 md_to_png.py input.md --width 1400
 ```
 
 | Flag | Default | Meaning |
-| --- | --- | --- |
+|------|---------|---------|
 | `--output` / `-o` | `<input>.png` | Output PNG path |
 | `--width` | `1200` | Content width in CSS pixels |
 | `--scale` | `2` | Device scale factor (1 = standard, 2 = retina, 3 = 3x) |
 
 ## Pipeline
 
-```text
+```
 md ──builtin regex──→ HTML ──Playwright Chromium──→ PNG
 ```
 
@@ -58,7 +56,6 @@ regex-based converter (no external `markdown` package needed).
 ## Customising the look
 
 Edit the CSS inside `HTML_TEMPLATE` in `md_to_png.py`:
-
 - Font family / size
 - Heading colours
 - Table header background (`th { background: #1a73e8; ... }`)
@@ -66,9 +63,8 @@ Edit the CSS inside `HTML_TEMPLATE` in `md_to_png.py`:
 
 ## Example
 
-```sh
-python3 md_to_png.py claude_vs_ohmy_pi.md \
-  --output ~/Desktop/claude_vs_omp.png --scale 2
+```bash
+python3 md_to_png.py claude_vs_ohmy_pi.md --output ~/Desktop/claude_vs_omp.png --scale 2
 ```
 
 Produces a 2400×4202 px retina PNG (~600 KB) ready to paste anywhere.
